@@ -29,4 +29,7 @@ a.current {
     border-bottom-width: 0.4em;
     border-bottom-style: solid;
     border-bottom-color: olkch(80% 3% 200);
+    padding-bottom: 0.1em;
 }
+
+oklch(90.3% 0.25 351.0)
