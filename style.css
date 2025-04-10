@@ -25,6 +25,6 @@ nav a {
 }
 
 a.current {
-    margin-bottom: 0.4em;
-    border-bottom-color: oklch(80% 3% 200);
+    margin-bottom: 0.4em solid olkch(80% 3% 200);
+    padding-bottom: 0.1em;
 }
