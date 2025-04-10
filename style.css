@@ -23,3 +23,8 @@ nav a {
     text-align: center;
     padding: 0.5em;
 }
+
+a.current {
+    margin-bottom: 0.4em;
+    border-bottom-color: oklch(80% 3% 200);
+}
