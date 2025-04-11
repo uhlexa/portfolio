@@ -64,6 +64,7 @@ form label {
     margin-block: 0.4em;
 }
 
-.resume h1 {
-    text-align: center
-}
+main header {
+    text-align: center;
+    margin-block: 2em;
+  }
