@@ -68,3 +68,10 @@ main header {
     text-align: center;
     margin-block: 2em;
   }
+
+.section-break {
+    border: none;
+    border-top: 4px solid; 
+    margin-block: 2em;
+    width: 100%;
+}
