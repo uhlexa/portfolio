@@ -63,3 +63,8 @@ form button {
 form label {
     margin-block: 0.4em;
 }
+
+.projects {
+    display: grid;
+    grid-template-columns: (auto-fill, minmax(15em, 1fr));
+}
