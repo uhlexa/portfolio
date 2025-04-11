@@ -76,3 +76,7 @@ form label {
     width: 100%;
 }
 
+main section time {
+    font-style: italic;
+}
+
