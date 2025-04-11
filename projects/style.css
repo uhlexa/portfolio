@@ -66,5 +66,5 @@ form label {
 
 .projects {
     display: grid;
-    grid-template-columns: (auto-fill, minmax(15em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
 }
