@@ -66,8 +66,10 @@ form label {
 
 .name {
     text-align: center;
-    margin-block: 2em;
   }
+.link {
+    text-align: center;
+}
 
 .section-break {
     border: none;
