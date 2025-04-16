@@ -15,9 +15,15 @@ let pages = [
     { url: 'projects/', title: 'Projects' },
     { url: 'Resume/', title: 'Resume'},
     { url: 'contact/', title: 'Contact'},
-    { url: 'https://github.com/uhlexa', title: 'GitHub'}
     // add the rest of your pages here
   ];
+
+const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+? "/"                  // Local server
+: "uhlexa.github.io";         // GitHub Pages repo name
+
+url = !url.startsWith('http') ? BASE_PATH + url : url;
+
 
 let nav = document.createElement('nav');
 document.body.prepend(nav);
