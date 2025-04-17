@@ -75,3 +75,16 @@ form button {
 form label {
     margin-block: 0.4em;
 }
+
+label.color-scheme {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 80%;
+    background-color: Canvas;
+    color: CanvasText;
+    --border-color: oklch(50% 10% 200 / 40%);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--border-color);
+}
