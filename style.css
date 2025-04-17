@@ -81,7 +81,7 @@ label.color-scheme {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    font-size: 80%;
+    font-size: 70%;
     background-color: Canvas;
     color: CanvasText;
     border: 1px solid var(--border-color);
