@@ -55,7 +55,7 @@ document.body.insertAdjacentHTML(
     `
       <label class="color-scheme">
           Theme:
-          <select id="color-scheme-select>
+          <select id="color-scheme-select">
             <option value="light dark" id="auto-option">Automatic</option>
             <option value="light">Light</option>
             <option value="dark">Dark</option>
@@ -63,7 +63,7 @@ document.body.insertAdjacentHTML(
       </label>`,
   );
 
-const select = document.querySelector('.color-scheme-select')
+const select = document.querySelector('#color-scheme-select')
 
 select.addEventListener('input', function (event) {
   console.log('color scheme changed to', event.target.value);
