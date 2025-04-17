@@ -3,7 +3,6 @@
     color-scheme: light dark;
     background-color: Canvas;
     color: CanvasText;
-    border-bottom-color: var(--border-color);
 }
 
 body {
@@ -17,12 +16,13 @@ body {
 }
 
 nav {
+    --border-color: oklch(50% 10% 200 / 40%);
     display:flex;
     margin-bottom: 5em;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: oklch(80% 3% 200);
-    --border-color: oklch(50% 10% 200 / 40%);
+    border-bottom-color: var(--border-color);
+    /* border-bottom-color: oklch(80% 3% 200); */
 }
 
 nav a {
