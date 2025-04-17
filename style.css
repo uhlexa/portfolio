@@ -1,5 +1,8 @@
 :root {
     --color-accent: oklch(70% 20% 0);
+}
+
+html {
     color-scheme: light dark;
     background-color: Canvas;
     color: CanvasText;
