@@ -50,3 +50,14 @@ for (let p of pages) {
     }
 }
 
+document.body.insertAdjacentHTML(
+    'afterbegin',
+    `
+      <label class="color-scheme">
+          Theme:
+          <select>
+              <!-- TODO add <option> elements here -->
+          </select>
+      </label>`,
+  );
+
