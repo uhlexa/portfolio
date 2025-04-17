@@ -78,8 +78,8 @@ form label {
 
 label.color-scheme {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 1rem;
+    right: 1rem;
     font-size: 80%;
     background-color: Canvas;
     color: CanvasText;
@@ -87,4 +87,6 @@ label.color-scheme {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: var(--border-color);
+    padding: 0.4em 0.6em;
 }
+
