@@ -19,9 +19,11 @@ body {
 }
 
 nav {
-    --border-color: oklch(50% 10% 200 / 40%);
+    background-color: Canvas;
+    color: CanvasText;
     display:flex;
     margin-bottom: 5em;
+    --border-color: oklch(50% 10% 200 / 40%);
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: var(--border-color);
