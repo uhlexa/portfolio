@@ -78,8 +78,8 @@ form label {
 
 label.color-scheme {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 2rem;
+    right: 2rem;
     font-size: 80%;
     background-color: Canvas;
     color: CanvasText;
