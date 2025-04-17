@@ -27,7 +27,7 @@ nav {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: var(--border-color);
-    padding-right: em;
+    padding-right: 8em;
     /* border-bottom-color: oklch(80% 3% 200); */
 }
 
