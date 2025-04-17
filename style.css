@@ -42,7 +42,8 @@ a.current {
     border-bottom-width: 0.4em;
     border-bottom-style: solid;
     font-weight: bold;
-    border-bottom-color: oklch(80% 3% 200);
+    /* border-bottom-color: oklch(80% 3% 200); */
+    border-bottom-color: var(--border-color);
     padding-bottom: 0.1em;
 }
 
