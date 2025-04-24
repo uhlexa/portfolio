@@ -99,5 +99,4 @@ export async function fetchJSON(url) {
   }
 }
 
-fetchJSON('C:/Users/15623/Documents/GitHub/portfolio/lib/projects.json');
-
+fetchJSON('./lib/projects.json')
