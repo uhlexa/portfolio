@@ -97,7 +97,8 @@ export async function fetchJSON(url) {
     console.error('Error fetching or parsing JSON data:', error);
   }
 }
-fetchJSON('./lib/projects.json').then((projects) => {
+
+fetchJSON('../lib/projects.json').then((projects) => {
   console.log('Loaded project data:', projects);
   // You can then render the projects to the page here
 });
