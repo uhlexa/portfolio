@@ -99,6 +99,6 @@ export async function fetchJSON(url) {
   }
 }
 
-fetchJSON('./data/projects.json');
+fetchJSON('./projects.json');
 
 
