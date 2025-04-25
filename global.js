@@ -122,3 +122,5 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
   containerElement.appendChild(article);
 
 }
+
+import('/projects/projects.js');
