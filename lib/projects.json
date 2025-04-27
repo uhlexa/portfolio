@@ -8,67 +8,67 @@
     {
         "title": "Current Against-Visualization for DSC 106 Project 2",
         "year": "2025",
-        "image": "../images/vis4_proj2.png",
+        "image": "/portfolio/images/vis4_proj2.png",
         "description": "With a dataset that gives information on complainants by race, I constructed a against argument that believes Black people recieve more complainants compared to White people"
     },
     {
         "title": "Healthy Living: Is Target a Valid Option?",
         "year": "2025",
-        "image": "../images/proj1.png",
+        "image": "/portfolio/images/proj1.png",
         "description": "Filled in area chart that displays a finding from a dataset that includes information on Walmart, Whole Foods, Target and the foods they sell."
     },
     {
         "title": "UN WordCloud",
         "year": "2025",
-        "image": "../images/wordcloud.png",
+        "image": "./portfolio/images/wordcloud.png",
         "description": "Word Cloud to demonstrate the most common words used in the UN General Debate corpus’. This excludes meaningless words through pre-processing completed in R"
     },
     {
         "title": "Enhancing Recipe Quality Prediction through Nutritional Feature Engineering",
         "year": "2024", 
-        "image": "../images/projectimage1.png",
+        "image": "/portfolio/images/projectimage1.png",
         "description": "To improve our baseline prediction model on average ratings, we added two new engineered features (since we’ve utilized all previous viable features). This plot displays the predictions from our final RandomForest model compared to the actual average ratings. Compared to our baseline model, these predictions fall closer to the ideal line (difference in accuracy with predicting ratings)."
     },  
     {
         "title": "COGS 108 Final Project Findings",
         "year": "2024",
-        "image": "../images/cogs108_image1.png",
+        "image": "/portfolio/images/cogs108_image1.png",
         "description": "My team and I wanted to determine if the rise in school shootings was correlated with the release of shooter based video games. This visualization showed that there might have been a slight correlation, but our P-value suggested that the results were insignificant."
     },
     {
         "title": "Midterm 2 Project",
         "year": "2024",
-        "image": "../images/taylor_wordcloud.png",
+        "image": "/portfolio/images/taylor_wordcloud.png",
         "description": "Given a dataset with Taylor Swift songs, we had to explore the data and generate a word cloud with the most common words. We also designed a song-recommender that suggested users different songs based on a given Taylor Swift song they enjoyed."
     },
     {
         "title": "Econ 5 Bar Plot",
         "year": "2024",
-        "image": "../images/econ5_code.png",
+        "image": "/portfolio/images/econ5_code.png",
         "description": "Using a dataset that included information on resumes, demographics of the owner, and their callback rates we created a bar plot that demonstrated any differences."
     },
     {
         "title": "Marketing Introduction",
         "year": "2023",
-        "image": "../images/mgt103_image.png",
+        "image": "/portfolio/images/mgt103_image.png",
         "description": "A promotional plan created using gamma. Intended to allow us to utilize marketing strategies from class as well as learning how to implement AI into our presentation."
     },      
     {
         "title": "HandDrawn Visualization",
         "year": "2023",
-        "image": "../images/screentime.png",
+        "image": "/portfolio/images/screentime.png",
         "description": "Color-coded barplot I drew to present my differences in screentime for a given week"
     },
     {
         "title": "Econ120b Histogram",
         "year": "2023",
-        "image": "../images/histogram120b.png",
+        "image": "/portfolio/images/histogram120b.png",
         "description": "Histogram that displays the annual unemployment rate in 2009 with R"
     },
     {
         "title": "Econ120b Scatter Plot",
         "year": "2023",
-        "image": "../images/scatterplot120b.png",
+        "image": "/portfolio/images/scatterplot120b.png",
         "description": "Scatterplot that shows the annual unemployment rate in 2009 along with the variable murders per 100,000 people in 2009."
     }
 ]
