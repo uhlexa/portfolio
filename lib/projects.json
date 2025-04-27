@@ -20,7 +20,7 @@
     {
         "title": "UN WordCloud",
         "year": "2025",
-        "image": "./portfolio/images/wordcloud.png",
+        "image": "/portfolio/images/wordcloud.png",
         "description": "Word Cloud to demonstrate the most common words used in the UN General Debate corpus’. This excludes meaningless words through pre-processing completed in R"
     },
     {
