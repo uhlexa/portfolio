@@ -2,7 +2,7 @@
     {
         "title": "Current For-Visualization for DSC 106 Project 2",
         "year": "2025",
-        "image": "/images/vis2.png",
+        "image": "/portfolio/images/vis2.png",
         "description": "With a dataset that gives information on complainants by race, I constructed a for argument that believes Black people recieve more complainants compared to White people"
     },      
     {
@@ -15,7 +15,7 @@
         "title": "Healthy Living: Is Target a Valid Option?",
         "year": "2025",
         "image": "../images/proj1.png",
-        "description": "Filled in area chart to display a finding from a dataset that includes information on Walmart, Whole Foods, Target and the foods they sell."
+        "description": "Filled in area chart that displays a finding from a dataset that includes information on Walmart, Whole Foods, Target and the foods they sell."
     },
     {
         "title": "UN WordCloud",
