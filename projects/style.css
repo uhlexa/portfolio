@@ -3,9 +3,6 @@
 }
 
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
     font: 100%/1.5 system-ui;
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
@@ -62,32 +59,4 @@ form button {
 
 form label {
     margin-block: 0.4em;
-}
-
-.projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-    gap: 1em;
-    margin-block: 2em;
-}
-
-.projects article {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-    margin: 0;
-    gap: 1em;
-}
-
-.projects h2 {
-    margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    line-height: 1.1;
-    text-wrap: balance;
-}
-
-h1 {
-    font-size: 400%;
 }

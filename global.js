@@ -112,15 +112,33 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
     return;
   }
 
-  for (const project of projects) {}
+  const projectsTitle = document.querySelector('.projects-title');
+  console.log('Projects:', project);
+
+  // If there's a valid title element, update the project count
+  if (projectsTitle) {
+    projectsTitle.textContent = `${project.length} Projects`; // Update the title to include the count
+  }
+
+  for (const pro of project) {
     const article = document.createElement('article');
+
     article.innerHTML = `
-      <h3>${project.title}</h3>
-      <img src="${project.image}" alt="${project.title}">
-      <p>${project.description}</p>
+    <h3>${pro.title}</h3>
+    <img src="${pro.image}" alt="${pro.title}">
+    <p>${pro.description}</p>
     `;
-  containerElement.appendChild(article);
+    containerElement.appendChild(article);
+  }
 
 }
 
-import('/projects/projects.js');
+
+
+export async function fetchGitHubData(username) {
+  // return statement here
+  return fetchJSON(`https://api.github.com/users/${username}`);
+  
+}
+
+
