@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Project 2 Report</title>
+    <style>
+      :root {
+        --color-neutral-95: hsl(220 10% 95%);
+        --color-neutral-90: hsl(220 10% 90%);
+        --color-neutral-80: hsl(220 10% 80%);
+        --color-neutral-70: hsl(220 10% 70%);
+        --color-neutral-60: hsl(220 10% 60%);
+        --color-neutral-50: hsl(220 10% 50%);
+        --color-neutral-40: hsl(220 10% 40%);
+        --color-neutral-30: hsl(220 10% 30%);
+        --color-neutral-20: hsl(220 10% 20%);
+        --color-neutral-10: hsl(220 10% 10%);
+      }
+
+      html {
+        font: 100%/1.5 system-ui;
+        counter-reset: figure;
+        background: var(--color-neutral-95);
+        max-width: min(75vw, 80em);
+        margin: 0 auto;
+      }
+
+      /* Headings */
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        line-height: 1.1;
+        font-weight: 600;
+        text-wrap: balance;
+      }
+
+      h1,
+      h2 {
+        border-bottom: 1px solid var(--color-neutral-80);
+        padding-bottom: 0.2em;
+      }
+
+      h1 {
+        margin-block: 1em 0.5rem;
+        font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
+        font-weight: 800;
+
+        small {
+          display: block;
+          width: fit-content;
+          padding: 0.2em 0.5em;
+          margin-inline: auto;
+          color: white;
+          background: var(--color-neutral-40);
+          font-size: 40%;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+      }
+
+      h2 {
+        font-size: 180%;
+        color: var(--color-neutral-30);
+      }
+
+      h3 {
+        font-size: 130%;
+      }
+
+      /* Lists */
+
+      ul,
+      ol {
+        padding-inline-start: 2em;
+      }
+
+      li {
+        &::marker {
+          color: var(--color-neutral-40);
+        }
+
+        + li {
+          margin-top: 0.2em;
+        }
+      }
+
+      /* Sectioning elements */
+
+      header {
+        padding-block: 1em;
+        text-align: center;
+      }
+
+      main {
+        background: white;
+        color: var(--color-neutral-20);
+        border-radius: 1rem;
+        padding: 0.1rem 2rem;
+      }
+
+      /* Figures */
+
+      figure {
+        margin: 1em 0;
+        padding: 0.5rem;
+        margin-inline: -0.5em;
+        border: 1px solid var(--color-neutral-80);
+        box-shadow: 0 0.1em 0.2em var(--color-neutral-95);
+        text-align: center;
+        background: white;
+
+        > figcaption {
+          font: 500 75% var(--font-sans);
+          background: var(--color-neutral-95);
+          padding: 0.5rem;
+          margin: -0.5rem;
+          margin-top: 0.5rem;
+          counter-increment: figure;
+          text-align: left;
+
+          &::before {
+            content: 'Figure ' counter(figure) ': ';
+            font-weight: bold;
+            color: var(--color-neutral-40);
+          }
+
+          a:not(:hover, :focus, :active) {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: color-mix(
+              in lab,
+              currentColor,
+              transparent 70%
+            );
+          }
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>
+        <small>Assignment 4</small>
+        Persuasive or Deceptive Visualization?
+      </h1>
+
+      <p><strong>Alexa Fernandez Tobias</strong> — <em>afernandeztobias@ucsd.edu</em></p>
+    </header>
+
+    <main>
+      <h2>Proposition: Black people receive a disproportionate amount of unsubstantiated complaints compared to White people.</h2>
+
+      <section>
+        <h3>FOR the Proposition</h3>
+
+        <figure>
+          <img src="./for_viz.png" alt="" />
+          <figcaption>Double line plot demonstrating the difference between the number of unsubstantiated complaints of Black and White people.</figcaption>
+        </figure>
+
+        <p>Design Decisions and Rationale:</p>
+
+        <ul>
+          <li>Y-axis scale(-1.5): Using a raw number of unsubstantiated complaints. 
+          Black people are already over-represented in this dataset so I knew using the raw count of unsubstantiated complaints would show that Black people have a lot more. While I did not manipulate the data in a deceiving way, it does not let viewers see the actual reason they have so much more (all they see is White people having 100’s less). Essentially, I am choosing to mislead viewers by concealing other variables that play into a high unsubstantiated complaint count.</li>
+          <li>X-axis year cutoffs(-2): Excluding years before 2002 and after 2017.
+            I chose to not show these years as they contradicted what I was trying to convey for a brief moment. You were able to see the gap between the two races decrease and almost converge. One might have been able to argue that the statement is not completely true based on those years.</li>
+          <li>Selecting only Black and White people to showcase(-0.5):
+          If I included other races, the differences between the two would be less-dramaticized. If other races showed similar results to Black, it would make my case less-strong.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>AGAINST the Proposition</h3>
+
+        <figure>
+          <img src="./against_viz.png" alt="" />
+          <figcaption>Bar plot demonstrating the differences between unsubstantiated complaints across different ethnicities.</figcaption>
+        </figure>
+
+        <p>Design Decisions and Rationale:</p>
+
+        <ul>
+          <li>Y-axis scale(2): Using proportions of unsubstantiated complainants.
+          Using proportions actually accounts for the difference in size between White and Black overall complainants. This dataset has a larger number of Black complainants which says something in it of itself. This means it also heavily skews the perception of the claim above (that Black people receive more unsubstantiated complaints). Essentially using the proportion puts White people and Black people on the same level to more accurately compare who gets more unsubstantiated complaints.</li>
+          <li>Keeping all years in proportion calculation(2):
+          To add to 'accurately' displaying who gets more unsubstantiated complaints, I did not remove any outliers nor did I section off a certain year range. If I did, I would have had to briefly mention it in the plot which may expose ‘deceptive’ techniques in trying to get a lower average for either race.</li>
+          <li>Keeping the bars the same color(-0.5):
+          Since I’m trying to show how the differences between Black and White unsubstantiated complaints is slim, I chose to make the bars the same color. When I first had blue and a lighter shade of blue, the slight difference was a bit more noticeable to the average viewer. Making them the same color also encourages grouping the two races together for this observation.</li>
+          <li>Choosing a bar-chart(-1):
+          I first started working with a double line plot for this side (like the first graph, but with proportions). While this somewhat displayed a similar interpretation, viewers are more easily able to pinpoint specific years where either Black people or White people were receiving more unsubstantiated complaints. A bar-chart helped ‘hide’ those specific moments and highlights how the averages are similar.</li>
+          <li> Adding Asians and American Indians(-0.5): I wanted to add more ethnicities that specifically had lower proportions to emphasize their similarity. Again, I was not manipulating the data so I'm not completely being deceptive, but I was cherry picking information to help sell a point.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Final Reflection</h2>
+
+        <p>I honestly struggled a lot with coming up with an opposing argument with a lot of the ‘claims’ I first came across. While I was able to come up with visualizations that somewhat went against the for side, it was never really an obvious observation and it seemed like viewers could have argued the opposite of what I wanted. Once I started playing around with proportions I was able to actually advance in the project and have my visualizations make more solid claims. That being said, I was really surprised with the amount of varying visualizations I was able to make about the same market. A lot of the times I expected a different outcome from my data transformations (log-transformation, excluding outliers, etc.), but I just ended up with several plots that repeated the same argument.</p>
+        <p>
+          It was interesting to me how I used both deceptive and earnest methods in both visualizations, even if I believed one visualization could be labeled as earnest overall. I define “ethical analysis and visualization” as transparent, yet comprehensive storytelling with plots. Even when you have a point to prove, the bias you have in mind should not affect your visualizations (like toying with the data until you get what you expect). Acceptable persuasive choices are there to emphasize a claim that is believed to be true considering all the data, rather than providing misleading information to drive a claim that one wishes to be true. Misleading persuasive choices are when your visualization fails to provide viewers with context that tells an opposing narrative. Style choices should of course be used to emphasize points wanted to be made, but not at the expense of fairness and accuracy. For example, choosing a specific color palette that drives viewers to a part of the visualization that highlights your assertion is persuasive as long as that assertion is not built on misguided assumptions.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
