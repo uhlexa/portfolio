@@ -16,6 +16,7 @@ let pages = [
     { url: 'Resume/', title: 'Resume'},
     { url: 'contact/', title: 'Contact'},
     { url: 'https://github.com/uhlexa/portfolio', title: 'GitHub'}
+    { url: 'project2_report', title: 'Project 2'}
     // add the rest of your pages here
   ];
 
