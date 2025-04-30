@@ -144,5 +144,12 @@ h1 {
     height: auto;
     object-fit: cover;
 }
+.year {
+    font-family: Baskerville;
+    font-variant-numeric: oldstyle-nums;
+    color: gray;
+    margin-top: 0.2em;
+    font-size: 0.9em;
+  }
 
 
