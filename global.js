@@ -62,13 +62,13 @@ document.body.insertAdjacentHTML(
           </select>
       </label>`,
   );
+const select = document.querySelector('#color-scheme-select')
 
 if ("colorScheme" in localStorage) {
     const saved = localStorage.colorScheme;
     setColorScheme(saved);
     select.value = saved;
 }
-const select = document.querySelector('#color-scheme-select')
 
 select.addEventListener('input', function (event) {
   console.log('color scheme changed to', event.target.value);
