@@ -60,3 +60,10 @@ form button {
 form label {
     margin-block: 0.4em;
 }
+
+#projects-pie-plot {
+    max-width: 20em;
+    margin-block: 2em;
+  
+    overflow: visible;
+}
