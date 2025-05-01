@@ -30,15 +30,15 @@ for (let d of data) {
 
 let arcs = arcData.map((d) => arcGenerator(d));
 
-arcs.forEach((arc) => {
-    // TODO, fill in step for appending path to svg using D3
-  });
+// arcs.forEach((arc) => {
+//     // TODO, fill in step for appending path to svg using D3
+//   });
 
 
-let colors = ['gold', 'purple'];
-arcs.forEach((arc, idx) => {
-    d3.select('svg')
-      .append('path')
-      .attr('d', arc)
-      .attr(...) // Fill in the attribute for fill color via indexing the colors variable
-})
+// let colors = ['gold', 'purple'];
+// arcs.forEach((arc, idx) => {
+//     d3.select('svg')
+//       .append('path')
+//       .attr('d', arc)
+//       .attr(...) // Fill in the attribute for fill color via indexing the colors variable
+// })
