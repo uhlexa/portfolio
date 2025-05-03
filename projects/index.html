@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Projects page </title>
     <link rel="stylesheet" href="../style.css"> 
-    <link rel="stylesheet" href="../global.js">
+    <!-- <link rel="stylesheet" href="../global.js"> -->
 </head>
         <!-- <link rel="stylesheet" href="../global.css"> -->
 
 <body>
 
-
     <h1 class="projects-title"> Projects </h1>
-    <svg id="projects-pie-plot" viewBox="-50 -50 100 100">
+    <div class="container">
+        <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
+        <ul class="legend"></ul>
+    </div>
+    <input
+        class="searchBar"
+        type="search"
+        aria-label="Search projects"
+        placeholder="🔍 Search projects…"
+    />
+
         <!-- <path d="M -50 0 A 50 50 0 0 1 50 0 A 50 50 0 0 1 -50 0" fill="red" /> -->
-      </svg>
     <div class="projects">
-       
     </div>
 
     <script src="../global.js" type="module"></script>

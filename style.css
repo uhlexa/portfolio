@@ -151,12 +151,59 @@ h1 {
     margin-top: 0.2em;
     font-size: 0.9em;
   }
-  #projects-pie-plot {
-    max-width: 20em;
+
+.container {
+    display: flex;
+    gap: 1em;          
+    align-items: center;
+    width: 100%;
+}
+
+#projects-pie-plot {
+    max-width: 15em;      
     margin-block: 2em;
+    overflow: visible;     
+}
+
+.legend {
+    flex: 1;      
+    border: 1px solid;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    gap: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
   
-    overflow: visible;
-  }
+}
+.legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 
+}
 
+.legend li .swatch {
+    width: 1em;
+    aspect-ratio: 1 / 1;
+    background-color: var(--color);
+    display: inline-block;
+    border-radius: 50%;
+}
+&:has(path:hover) {
+    path:not(:hover) {
+      opacity: 0.5;
+    }
+}
 
+path {
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.selected {
+    --color: oklch(50% 45% 0) !important;
+  
+    &:is(path) {
+      fill: var(--color);
+    }
+}
