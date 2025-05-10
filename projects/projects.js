@@ -80,8 +80,6 @@ function renderPieChart(projectsGiven) {
                 renderProjects(projects, projectsContainer, 'h2');
             } else {
                 renderProjects(projects.filter(p => p.year === newData[selectedIndex].label), projectsContainer, 'h2')
-        // TODO: filter projects and project them onto webpage
-        // Hint: `.label` might be useful
             }
         });
     });
