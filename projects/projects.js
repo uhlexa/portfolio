@@ -7,10 +7,8 @@ let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 let legend = d3.select('.legend');
 let query = '';
-// let arc = arcGenerator({
-//     startAngle: 0,
-//     endAngle: 2 * Math.PI,
-//   });
+
+
 
 renderProjects(projects, projectsContainer, 'h2');
 renderPieChart(projects);
@@ -52,9 +50,6 @@ function renderPieChart(projectsGiven) {
 
     
     newArcs.forEach((arc, i) => {
-        // newSVG.append('path')
-        // .attr('d', arc)
-        // .attr('fill', colors(idx)) 
         newSVG
         .append('path')
         .attr('d', arc)

@@ -206,6 +206,8 @@ path {
     &:is(path) {
       fill: var(--color);
     }
+    stroke: orange;
+    stroke-width: 2px;
 }
 
 .stats {
@@ -230,7 +232,7 @@ path {
 
 dl.info {
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-rows: max-content auto;
   gap: 0.25em 1em;
   font-family: sans-serif;
   margin: 0;
@@ -261,8 +263,12 @@ dl.info dd {
 
 circle {
   transition: 200ms;
-  transform-origin: center;
-  transform-box: fill-box;
+  /* transform-origin: center;
+  transform-box: fill-box; */
+
+  @starting-style {
+    r: 0;
+  }
 }
 
 circle:hover {
@@ -308,4 +314,64 @@ circle.selected {
   stroke-opacity: 0.7;
   stroke-dasharray: 5 3;
   animation: marching-ants 2s linear infinite;
+}
+
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+
+  > div {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  dt {
+    grid-column: 1;
+  }
+
+  dd {
+    grid-column: 2;
+  }
+}
+
+.loc {
+  display: flex;
+  width: 0.5em;
+  aspect-ratio: 1;
+  background: var(--color, steelblue);;
+  border-radius: 50%;
+}
+
+dd {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  align-content: start;
+  gap: 0.15em;
+  padding-top: 0.6em;
+  margin-left: 0;
+}
+
+#scrolly-1 {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+
+  > * {
+    flex: 1;
+  }
+}
+
+#scatter-story {
+  position: relative;
+}
+
+#scatter-plot {
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  height: 50vh;
 }
