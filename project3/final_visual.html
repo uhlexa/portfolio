@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Interactive Health Visualization: Surgical Approach and ICU Outcomes</title>
+
+  <link rel="icon" type="image/png"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P//PwMIAgAD+gFx5avX+AAAAAElFTkSuQmCC">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+
+
+    .chart-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: space-between;
+      column-gap: 20px;
+      /* flex-wrap: wrap; */
+      /* width: 95%; */
+      /* width: 100%; */
+      margin: 0 auto;
+    }
+
+    .chart {
+      /* width: 48%; */
+      border: 1px solid #ddd;
+      padding: 10px;
+      background: #f9f9f9;
+      margin-bottom: 20px;
+      position: relative;
+      min-width: 550px;
+    }
+
+    .figure-description {
+      width: 48%;
+      font-size: 14px;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .figure-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 95%;
+      margin: 0 auto 30px auto;
+    }
+
+    .tooltip {
+      position: absolute;
+      background: lightsteelblue;
+      padding: 5px;
+      border-radius: 5px;
+      pointer-events: none;
+      opacity: 0;
+      font-size: 12px;
+    }
+
+    .writeup {
+      margin: 30px auto;
+      width: 700px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      background: #fff;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .axis text {
+      font-size: 12px;
+    }
+
+    .bar:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+
+
+    .legend-item {
+      cursor: pointer;
+    }
+
+
+  .help-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 1000;
+  }
+
+
+  .help-box {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+
+
+    #detailMessage {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <h1>Unveiling the Impact of Surgical Techniques on ICU Recovery </h1>
+  <div style="text-align: center; margin: 20px;">
+    <label>
+      <input type="checkbox" id="showAllCases" checked>
+      Show All Cases
+    </label>
+  </div>
+
+  <div class="help-icon" onclick="toggleHelp()">?</div>
+
+  <!-- Help Box -->
+  <div id="helpContent" class="help-box" style="display: none;">
+    <h3>Interaction Guide</h3>
+    <ol>
+      <li>Use the "Show All Cases" toggle to include or exclude cases with zero ICU days.</li>
+      <li>Click on a anesthesia type in legend to highlight across categories..</li>
+      <li>Click on a bar in the left chart to filter by surgical approach and view detailed distribution on the right chart.</li>
+      <li>Hover over bars to view detailed information including surgical approach, anesthesia type, and average ICU days.</li>
+    </ol>
+  </div>
+
+  
+
+
+  <div class="chart-container">
+    <!-- Overview Chart -->
+    <div id="chartOverview" class="chart">
+      <h2>ICU Stay by Surgical Approach</h2>
+    </div>
+
+    <!-- Detail Chart -->
+    <div id="chartDetail" class="chart">
+      <h2>In-Depth View: Operative Distribution for Selected Approach</h2>
+      <p id="detailMessage" style="text-align:center;">Click on a bar in the overview chart to see detailed case
+        distribution.</p>
+
+    </div>
+  </div>
+
+    <div class="figure-container" style="display: flex; justify-content: space-between; margin-top: -20px;">
+      <div class="figure-description" style="width: 48%; margin-right: 5px;">
+        <p><strong>Figure 1:</strong> This chart compares average ICU stay durations across different surgical approaches, highlighting variations by anesthesia type. 
+          Open surgeries generally show higher ICU days compared to minimally invasive techniques.</p>
+      </div>
+      <div class="figure-description" style="width: 48%; margin-left: 5px;">
+        <p><strong>Figure 2:</strong> This chart breaks down case counts for a selected surgical approach, categorized by operative type and anesthesia. It reveals how specific operations differ in frequency and ICU stay duration.</p>
+      </div>
+    </div>
+
+  <!-- Tooltip -->
+  <div id="tooltip" class="tooltip"></div>
+
+
+  <div class="writeup">
+    <h2>Project Write-Up</h2>
+    <p><strong>Design Rationale:</strong><br>
+      We explored various vital signs by surgical approaches and anesthesia types, ultimately focusing on how surgical approaches impact ICU outcomes. The overview chart displays average ICU days for each surgical approach, segmented by anesthesia type, while the detail chart breaks down case counts by operative type for a selected approach. To enhance interactivity, we implemented clickable bars to drill down into specific approaches, tooltips for detailed data on hover, as well as a clickable legend to clearly highlight anesthesia types.
+
+      Choosing colors that intuitively separate anesthesia types helps users compare categories effectively. One challenge was that most average ICU stays were less than one day, skewing the visualization and unclear distinctions. Exclusively showing non-zero ICU days significantly reduced the dataset, so we added a toggle button to switch between including and excluding zero-day cases. Additionally, we incorporated a help button to provide clear instructions for interacting with the visualization, making it more user-friendly.
+    </p>
+    <p><strong>Interaction Techniques:</strong><br>
+      The visualization incorporates several interactive features to enhance data exploration and user engagement. The  clickable legend allows users to distinguish between specific anesthesia types by colour within the Surgery Categories. Selecting a bar in the overview chart drills down into the chosen surgical approach, displaying a detailed breakdown of case distribution by operative type and anesthesia. This design choice maintains a clear narrative from general trends and overall distribution to specific insights.
+
+      Hovering over any bar reveals a tooltip with detailed information about the surgical approach, anesthesia type, and ICU stay duration, providing context without cluttering the visualization. The detail chart also supports zooming and panning, enabling users to closely inspect distributions while maintaining an overview. To address data skew caused by many cases with zero ICU days, a toggle button allows users to include or exclude these cases, offering flexibility in data presentation. A help button in the top corner provides concise guidance on interacting with the charts, making the visualization accessible and intuitive.
+    </p>
+    <p><strong>Development Process:</strong><br>
+      The project took approximately 20–25 people-hours, with significant time spent refining interactivity and clarifying the visual narrative. Initially, we divided the work into exploring different visualization ideas and formulating potential research questions. After mutual discussions and feedback, we narrowed down the focus to examining ICU outcomes based on surgical approaches and anesthesia types. Early versions incorporated dropdown filters and multiple measures, but we shifted to a simplified approach after realizing that clickable highlights made the visualization more intuitive. Once the visualization concept was finalized, we brainstormed features to enhance interactivity, prioritizing usability without clutter. The most time-consuming aspect was ensuring that the visualization remained interactive and easy to interpret, while balancing detail and clarity. Through multiple iterations, we improved the layout, navigation, and interactive elements to create a more seamless and insightful user experience.
+    </p>
+  </div>
+
+  <script>
+    // Global variables and chart dimensions.
+    const margin = { top: 50, right: 30, bottom: 80, left: 70 },
+      width = 700 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+
+    let globalData;         
+    let selectedAnesthesia = null; 
+    let selectedSurg = null;     
+        
+    let showAllCases = true;
+
+    // Event listener for the checkbox toggle
+    d3.select("#showAllCases").on("change", function () {
+      showAllCases = this.checked;
+      updateCharts();
+    });
+
+    function toggleHelp() {
+      const helpContent = document.getElementById("helpContent");
+      if (helpContent.style.display === "none" || !helpContent.style.display) {
+        helpContent.style.display = "block";
+      } else {
+        helpContent.style.display = "none";
+      }
+    }
+
+
+    // Function to update the charts based on toggle state
+    function updateCharts() {
+      filteredData = showAllCases ? globalData : globalData.filter(d => d.icu_days > 0);
+      drawOverviewChart();
+      if (selectedSurg) {
+        drawDetailChart(selectedSurg);
+      }
+    }
+
+    // Color scale using actual anesthesia terms.
+    const color = d3.scaleOrdinal()
+      .domain(["General", "Spinal", "Sedationalgesia"])
+      .range(["#66c2a5", "#fc8d62", "#8da0cb"]);
+
+    // Create SVG containers for both charts.
+    const svgOverview = d3.select("#chartOverview")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const svgDetail = d3.select("#chartDetail")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Tooltip.
+    const tooltip = d3.select("#tooltip");
+
+    // Load CSV data.
+    d3.csv("cases.csv").then(function (data) {
+    data.forEach(d => {
+      d.icu_days = +d.icu_days;
+    });
+    globalData = data;
+    filteredData = globalData;  // Initialize filteredData
+    updateCharts();  // Initial chart rendering
+  })
+
+    // Global updateHighlight function now considers both anesthesia and surgical approach.
+    function updateHighlight() {
+      d3.selectAll(".bar")
+        .transition().duration(200)
+        .style("opacity", function (d) {
+          let opac = 1;
+          // If an anesthesia type is selected and this bar's anesthesia does not match, dim it.
+          if (selectedAnesthesia !== null && d.ane_type !== selectedAnesthesia) { opac *= 0.3; }
+          // In the overview chart, if a surgical approach is selected and this bar's approach does not match, dim it.
+          if (d.approach !== undefined && selectedSurg !== null && d.approach !== selectedSurg) { opac *= 0.3; }
+          return opac;
+        });
+
+      // Update anesthesia legend styling.
+      d3.selectAll(".legend-item rect")
+        .transition().duration(200)
+        .style("stroke", function () {
+          let ane = d3.select(this.parentNode).attr("data-ane");
+          return selectedAnesthesia !== null && ane === selectedAnesthesia ? "black" : null;
+        })
+        .style("stroke-width", function () {
+          let ane = d3.select(this.parentNode).attr("data-ane");
+          return selectedAnesthesia !== null && ane === selectedAnesthesia ? "2px" : "0px";
+        });
+
+      // In the overview chart, add a border to the selected surgical approach group.
+      d3.selectAll("g.approach")
+        .transition().duration(200)
+        .style("stroke", function (d) {
+          return selectedSurg !== null && d.approach === selectedSurg ? "black" : null;
+        })
+        .style("stroke-width", function (d) {
+          return selectedSurg !== null && d.approach === selectedSurg ? "2px" : "0px";
+        });
+    }
+
+    // Draw Overview Chart: Aggregates average ICU days by surgical approach and anesthesia type.
+    function drawOverviewChart() {
+    const dataToUse = filteredData;
+
+    // Get all unique approaches from the global data to maintain consistent x-axis order
+    const allApproaches = Array.from(new Set(globalData.map(d => d.approach)));
+
+    // Aggregate: group by surgical approach, then by anesthesia type.
+    const aggregated = Array.from(
+        d3.rollup(
+            dataToUse,
+            v => d3.mean(v, d => d.icu_days),
+            d => d.approach,
+            d => d.ane_type
+        )
+    ).map(([approach, map]) => ({
+        approach: approach,
+        measures: Array.from(map, ([ane_type, value]) => ({ ane_type, value }))
+    }));
+
+    svgOverview.selectAll("*").remove();
+
+    // Scales (use all approaches to ensure consistent x-axis order)
+    const x0 = d3.scaleBand()
+        .domain(allApproaches)  // Use all approaches from the original data
+        .range([0, width])
+        .padding(0.1);
+
+    const aneTypes = Array.from(new Set(globalData.map(d => d.ane_type)));
+    const x1 = d3.scaleBand()
+        .domain(aneTypes)
+        .range([0, x0.bandwidth()])
+        .padding(0.05);
+
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(aggregated, d => d3.max(d.measures, m => m.value)) || 1])  // Default to 1 if no data
+        .nice()
+        .range([height, 0]);
+
+    // X-axis & label.
+    svgOverview.append("g")
+        .attr("class", "x-axis")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x0))
+        .selectAll("text")
+        .attr("transform", "rotate(-40)")
+        .style("text-anchor", "end");
+
+    svgOverview.append("text")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 10)
+        .attr("text-anchor", "middle")
+        .text("Surgical Approach");
+
+    // Y-axis.
+    svgOverview.append("g")
+        .call(d3.axisLeft(y));
+
+    // Draw bars.
+    const groups = svgOverview.selectAll("g.approach")
+        .data(aggregated)
+        .join("g")
+        .attr("class", "approach")
+        .attr("transform", d => `translate(${x0(d.approach)}, 0)`);
+
+    groups.selectAll("rect")
+        .data(d => d.measures.map(m => ({ ...m, approach: d.approach })))
+        .join("rect")
+        .attr("x", d => x1(d.ane_type))
+        .attr("y", d => y(d.value))
+        .attr("width", x1.bandwidth())
+        .attr("height", d => height - y(d.value))
+        .attr("fill", d => color(d.ane_type))
+        .attr("class", "bar")
+        .on("mouseover", function (event, d) {
+            tooltip.transition().duration(200).style("opacity", 0.9);
+            tooltip.html(`<strong>Surgical Approach:</strong> ${d.approach}<br>
+                          <strong>Anesthesia:</strong> ${d.ane_type}<br>
+                          <strong>Avg ICU Days:</strong> ${d.value.toFixed(3)}`)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function () {
+            tooltip.transition().duration(500).style("opacity", 0);
+        })
+        .on("click", function (event, d) {
+            // Toggle selection of that surgical approach.
+            if (selectedSurg === d.approach) {
+                selectedSurg = null;
+                svgDetail.transition().duration(300).style("opacity", 0)
+                    .on("end", () => {
+                        svgDetail.selectAll("*").remove();
+                        d3.select("#detailMessage")
+                            .style("display", "block")
+                            .text("Click on a bar in the overview chart to see detailed case distribution.");
+                        svgDetail.transition().duration(300).style("opacity", 1);
+                    });
+            } else {
+                selectedSurg = d.approach;
+                drawDetailChart(d.approach);
+            }
+            updateHighlight();
+        });
+
+    // Y-axis label.
+    svgOverview.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -50)
+        .attr("x", -height / 2)
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Avg ICU Days");
+
+    // Add legend.
+    const legendOverview = svgOverview.append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(${width - 100}, 40)`);
+
+    legendOverview.append("text")
+        .attr("x", -10)
+        .attr("y", -10)
+        .style("font-size", "13px")
+        .style("text-anchor", "start")
+        .style("text-decoration", "underline")
+        .text("Anesthesia Types");
+
+    color.domain().forEach((d, i) => {
+        const legendRow = legendOverview.append("g")
+            .attr("class", "legend-item")
+            .attr("data-ane", d)
+            .attr("transform", `translate(0, ${i * 20})`)
+            .on("click", function () {
+                // Toggle anesthesia highlight.
+                if (selectedAnesthesia === d) {
+                    selectedAnesthesia = null;
+                } else {
+                    selectedAnesthesia = d;
+                }
+                updateHighlight();
+            });
+
+        legendRow.append("rect")
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", color(d));
+
+        legendRow.append("text")
+            .attr("x", 20)
+            .attr("y", 12)
+            .text(d)
+            .style("font-size", "12px")
+            .attr("text-anchor", "start");
+    });
+
+    updateHighlight();
+}
+
+
+
+    // Draw Detail Chart: Displays case distribution for the selected surgical approach.
+    function drawDetailChart(selectedApproach) {
+      console.log("drawDetailChart called with:", selectedApproach);
+      // Hide instruction message.
+      d3.select("#detailMessage").style("display", "none");
+
+      // Filter data for the selected surgical approach.
+      const filtered = filteredData.filter(d => d.approach === selectedApproach);
+
+      // Aggregate: count cases and compute avg ICU days by operative type and anesthesia type.
+      const aggregated = Array.from(
+        d3.rollup(
+          filtered,
+          v => ({ count: v.length, avg: d3.mean(v, d => d.icu_days) }),
+          d => d.optype,
+          d => d.ane_type
+        )
+      ).map(([optype, groupMap]) => ({
+        optype: optype,
+        groups: Array.from(groupMap, ([ane_type, metrics]) => ({
+          ane_type,
+          count: metrics.count,
+          avg: metrics.avg
+        }))
+      }));
+
+      // svgDetail.selectAll("*").remove();
+      svgDetail.transition()
+        .duration(300)
+        .style("opacity", 0)
+        .on("end", () => {
+          svgDetail.selectAll("*").remove();
+          svgDetail.transition()
+            .duration(300)
+            .style("opacity", 1);
+          const x0 = d3.scaleBand()
+            .domain(aggregated.map(d => d.optype))
+            .range([0, width])
+            .padding(0.1);
+
+          const aneTypes = Array.from(new Set(filtered.map(d => d.ane_type)));
+          const x1 = d3.scaleBand()
+            .domain(aneTypes)
+            .range([0, x0.bandwidth()])
+            .padding(0.05);
+
+          const maxCount = d3.max(aggregated, d => d3.max(d.groups, g => g.count));
+          const yCount = d3.scaleLinear()
+            .domain([0, maxCount])
+            .nice()
+            .range([height, 0]);
+
+          // Add x-axis with title.
+          console.log("append g");
+          svgDetail.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(x0))
+            .selectAll("text")
+            .attr("transform", "rotate(-40)")
+            .style("text-anchor", "end");
+
+          svgDetail.append("text")
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom - 10)
+            .attr("text-anchor", "middle")
+            .style("text-anchor", "middle")
+            .text("Operative Type");
+
+          // Add y-axis.
+          svgDetail.append("g")
+            .call(d3.axisLeft(yCount));
+
+          // Spruced-up title.
+          svgDetail.append("text")
+            .attr("x", width / 2)
+            .attr("y", -20)
+            .attr("text-anchor", "middle")
+            .style("font-size", "14px")
+            .text(`Surgical Approach: ${selectedApproach}`);
+
+          // Draw bars. In each datum, we also assign the selected surgical approach.
+          const groups = svgDetail.selectAll("g.optype")
+            .data(aggregated)
+            .join("g")
+            .attr("class", "optype")
+            .attr("transform", d => `translate(${x0(d.optype)}, 0)`);
+
+          groups.selectAll("rect")
+            .data(d => d.groups.map(g => ({ ...g, optype: d.optype, approach: selectedApproach })))
+            .join("rect")
+            .attr("x", d => x1(d.ane_type))
+            .attr("y", d => yCount(d.count))
+            .attr("width", x1.bandwidth())
+            .attr("height", d => height - yCount(d.count))
+            .attr("fill", d => color(d.ane_type))
+            .attr("class", "bar")
+            .on("mouseover", function (event, d) {
+              tooltip.transition().duration(200).style("opacity", 0.9);
+              tooltip.html(`<strong>Operative Type:</strong> ${d.optype}<br>
+                          <strong>Anesthesia:</strong> ${d.ane_type}<br>
+                          <strong>Case Count:</strong> ${d.count}<br>
+                          <strong>Avg ICU Days:</strong> ${d.avg.toFixed(3)}`)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function () {
+              tooltip.transition().duration(500).style("opacity", 0);
+            });
+
+          svgDetail.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -50)
+            .attr("x", -height / 2)
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Case Count");
+
+          // Add legend to the detail chart.
+          const legendDetail = svgDetail.append("g")
+            .attr("class", "legend")
+            .attr("transform", `translate(${width - 100}, 20)`);
+          
+            legendDetail.append("text")
+            .attr("x", -10)
+            .attr("y", -10)
+            .style("font-size", "12px")
+            .style("text-anchor", "start")
+            .style("text-decoration", "underline")  // Underline the title
+            .text("Anesthesia Types");
+
+
+          color.domain().forEach((d, i) => {
+            const legendRow = legendDetail.append("g")
+              .attr("class", "legend-item")
+              .attr("data-ane", d)
+              .attr("transform", `translate(0, ${i * 20})`)
+              .on("click", function () {
+                if (selectedAnesthesia === d) {
+                  selectedAnesthesia = null;
+                } else {
+                  selectedAnesthesia = d;
+                }
+                updateHighlight();
+              });
+            legendRow.append("rect")
+              .attr("width", 15)
+              .attr("height", 15)
+              .attr("fill", color(d));
+            legendRow.append("text")
+              .attr("x", 20)
+              .attr("y", 12)
+              .text(d)
+              .style("font-size", "12px")
+              .attr("text-anchor", "start");
+          });
+
+          updateHighlight();
+
+          // Add zooming support to the detail chart.
+          svgDetail.call(d3.zoom()
+            .scaleExtent([1, 5])
+            .on("zoom", (event) => {
+              svgDetail.attr("transform", event.transform);
+            }));
+        });
+    }
+  </script>
+</body>
+
+</html>
